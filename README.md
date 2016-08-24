@@ -9,3 +9,5 @@ Run this server to trap salesforce apex api requests
 * run your script or app
 
 As requests head to the apex api, the request body will be written to disk as json files. You can then use these to verify your requests.
+
+**Important!** When you're done, reverse the changes you made to your `/etc/hosts` file.
