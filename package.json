@@ -1,0 +1,26 @@
+{
+  "name": "apexmock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sterlingwes/apexmock.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sterlingwes/apexmock/issues"
+  },
+  "homepage": "https://github.com/sterlingwes/apexmock#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "del": "^2.2.2",
+    "express": "^4.14.0",
+    "mkdirp": "^0.5.1"
+  }
+}
