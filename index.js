@@ -14,7 +14,20 @@ var sslOptions = {
   cert: fs.readFileSync('keys/cert.pem')
 }
 
-app.use(parser.json())
+function rawBody(req, res, next) {
+  req.setEncoding('utf8');
+  req.rawBody = '';
+  req.on('data', function(chunk) {
+    req.rawBody += chunk;
+  });
+  req.on('end', function(){
+    next();
+  });
+}
+
+// app.use(parser.json())
+
+app.use(rawBody)
 
 /*
  * on start, clean out old requests
@@ -27,6 +40,8 @@ app.use(function (req, res, next) {
     return res.status(404).send('404')
   }
 
+  console.log('> request:', req.hostname, req.path, req.query)
+
   var timestamp = Date.now()
 
   var folder = FOLDER + req.path
@@ -36,7 +51,12 @@ app.use(function (req, res, next) {
     var file = folder + '/' + timestamp + '.json'
     console.log('-', 'writing request', file)
 
-    fs.writeFile(file, JSON.stringify(req.body, null, ' '), function (err) {
+    var body = {
+      // headers: req.headers,
+      body: req.rawBody
+    }
+
+    fs.writeFile(file, JSON.stringify(body, null, ' '), function (err) {
       if (err) console.error('!', err)
       res.json('SF_MOCK_ID_' + timestamp)
     })
